@@ -18,9 +18,11 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 tweet_df = pd.read_csv('train.csv')
 
-#print(tweet_df.head())
+tweet_df["labels"]=tweet_df["label"].map({0:"Neutral Speech", 1:"Offensive Speech"})
 
-#print(tweet_df.info())
+print(tweet_df.head())
+
+print(tweet_df.info())
 
 
 #print(tweet_df['tweet'].iloc[0],"\n")
@@ -93,3 +95,15 @@ print(confusion_matrix(y_test, logreg_predict))
 print("\n")
 print(classification_report(y_test, logreg_predict))
 
+# Preprocess the input text
+input_text = "sheila is a bitch"
+processed_text = data_processing(input_text)
+
+# Vectorize the preprocessed text
+input_vector = vect.transform([processed_text])
+
+# Make predictions
+prediction = logreg.predict(input_vector)
+
+# Print the prediction result
+print("Prediction:", prediction)
